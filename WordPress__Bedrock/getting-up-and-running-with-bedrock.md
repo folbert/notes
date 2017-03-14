@@ -1,23 +1,23 @@
-#Getting up and running with Bedrock
-This is guide aims to aid developers at [FEW](http://fewagency.se) to set up Bedrock in environments that we ofte use. Hopefully, it can be of help to other developers as well but be aware that there are some FEW specific information ahead. 
+# Getting up and running with Bedrock
+This is guide aims to aid developers at [KAN](http://kan.se) to set up Bedrock in environments that we often use for WordPress. Hopefully, it can be of help to other developers as well but be aware that there may be KAN-specific information ahead. 
 
 If you get totally stuck, here are some resources that may help you:
 [Roots Discourse](https://discourse.roots.io). Actually, you may want to head over and read this through really quick. It's nowhere near as long as this and may be good to have in the back of your mind when reading the rest of this document.
 [Capistrano Website with manual](http://capistranorb.com/)
 [Screencast on deploying WordPress with Capistrano](https://roots.io/screencasts/deploying-wordpress-with-capistrano/). FEW: This video also exist in our shared Dropbox folder. Note that it is getting a bit old and may contain outdated information.
 
-##Bedrock?
+## Bedrock?
 Bedrock is created by the ~~good~~ awesome people behind [Sage](http://roots.io/sage) and is described as a "WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure." Read more at 
 https://roots.io/bedrock.
 
-##OMG, this document is the size of a Stephen King novel!
+## OMG, this document is the size of a Stephen King novel!
 Fear not. While the guide is a bith lengthy (partly due to usesless paragraphs like this but also because it contains information on how to add plugins and set up SSH), you will probably only have to go through it once per project and then forget about it.
 
 While there is an official guide on how to get up and running with Bedrock, there are some things missing in it. Also, since we are often using [Oderland](http://oderland.se) for hosting, this guide also describes some extra steps necessary to get stuff up and running in their shared environment. The Oderland-steps may also apply to other shared hosting environments.
 
 In some places, this guide assumes that you are developing a theme based on [Sage](https://roots.io/sage/). If you are not using Sage: why are you not using Sage? If you still don't want to use Sage, you should probably be able to use this guide anyway and skip the Sage specific parts. Sage!
 
-##Setting up Bedrock locally from scratch
+## Setting up Bedrock locally from scratch
 These steps should be taken if yo are the first developer to work on a project. If you are to continue work on an existing Bedrock based project, check under "Cloning an existing Bedrock based project".
 
 1. Make sure you have a host and MySQL-database to use for the WP-installation on your computer.
@@ -39,7 +39,7 @@ Note that since both Bedrock and Sage comes with its own .gitignore file, we now
 
 If you haven't already made a git commit, now may be a good time to do one.
 
-##Cloning an existing Bedrock based project
+## Cloning an existing Bedrock based project
 If you are continuing work on an existing bedrock based project and that project already has remote servers set up, you probably wont have to do much Bedrock or deploy related set up but here's a list of some steps anyways:
 
 1. Follow the steps listed under the [Bedrock install guide](https://roots.io/bedrock/docs/installing-bedrock/) but instead of cloning the Bedrock repo, clone the existing project repo. As for step 4, the project repo probably comes with a theme so you can skip this.
@@ -53,7 +53,7 @@ Syncing the database and uploads is outside the scope of this guide.
 
 Make sure that you can SSH to the remote server(s) by following the steps under "Setting up an SSH connection to remote server"
 
-##Setting up site folder on remote server
+## Setting up site folder on remote server
 We need a folder and URL where the site will reside on the remote server(s) so, for Oderland, log in to cPanel and set that up as usual. You can set the doc root as usual for now, we will change that later on when composer have created folders for us. While you wont be able to see anything Bedrock/Wordpress related there, make sure that you can surf to the URL. While we are at it, set up a database to use as well and keep the username/password for later.
 
 ##Setting up an SSH connection to a remote server
@@ -74,7 +74,7 @@ Capistrano must be able to SSH to the server(s) to which deploys should be done.
         
 You should now be able to log in to the server by running the following in the terminal "ssh username@domain.void" where user is the master user name and domain.void is the main domain for the Oderland account.        
 
-##Setting up Composer on remote server
+## Setting up Composer on remote server
 We also need to be able to run [Composer](http://getcomposer.org) on the server so let's set that up.
 
 SSH to the server, go to the folder that you want to deploy to (that you set up under "Setting up site folder on remote server") and try running `composer`.
@@ -141,12 +141,12 @@ If something went wrong on a deploy:
 2. Run `bundle exec cap <environment> deploy:rollback`
 3. Wait for the script to finish and then reload URL of the remote server you just deployed to to see the rollback in all its glory.
  
-##Add plugins
+## Add plugins
 Plugins should also be handled using Composer. There's a guide on this under "Plugins" at https://roots.io/using-composer-with-wordpress/. Also some reading here about mu-plugins: https://roots.io/bedrock/docs/mu-plugins-autoloader/. Mu-plugins are must-use-plugins and is described here: https://codex.wordpress.org/Must_Use_Plugins .
 
 However, there are some plugins such as Advanced Custom Fields Pro, that are not available as Composer packages. In that case, read how to work around that in [Custom Composer Packages](custom-composer-packages.md).
 
-###Custom Composer packages 
+### Custom Composer packages 
 
 Below are some lines that will install some nice plugins. Add all of them or just some to require[] in composer.json in the root of your project.
 
